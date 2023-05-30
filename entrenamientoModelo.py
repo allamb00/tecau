@@ -27,7 +27,7 @@ for nameDir in peopleList:
     print('Leyendo las imágenes')
     lista_caras_registradas = [archivo for archivo in os.listdir(personPath) if archivo.endswith('.jpg')]
 
-    with tqdm(total=len(lista_caras_registradas), desc="Progreso de entrenamiento de caras registradas") as pbar:
+    with tqdm(total=len(lista_caras_registradas), desc="Progreso de lectura y clasificación de imágenes") as pbar:
         for fileName in lista_caras_registradas:
             labels.append(label)
             facesData.append(cv2.imread(personPath+'/'+fileName,0))
