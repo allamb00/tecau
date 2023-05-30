@@ -1,0 +1,24 @@
+# tecau
+Repositorio para subir la práctica final de tecnologías de autenticación
+
+## ejercicio 1.py
+Es el primer ejercicio especificado en la practica 5. Recoge un número de capturas por pantalla y construye un dataset de forma automática. es necesario revisar el dataset buscando los falsos positivos. El algoritmo es bastante estricto, así que no debería haber muchos (He tenido 4 en las más de 3000 imagenes que he capturado)
+
+## haarcascade.py
+Reconoce rostros utilizando el modelo de cascada Haar que hemos visto en clase
+
+## adaboost.py
+Es un modelo que me ha recomendado ChatGPT para reducir los falsos positivos y negativos de haarcascade. Es demasiado complejo y no he conseguido hacerlo funcionar. Acutalmente lo tengo descartado
+
+## script.py
+Es el script de detección facial que he usado al inicio
+
+## haarcascade_frontalface_default.xml
+Es el modelo de cascada Haar por defecto utilizado en las prácticas
+
+## Dataset
+El dataset que he utilizado es uno de elaboración propia con el primer script y humanfaces de google, para entrenar las caras de desconocidos.
+Lo he dejado en Drive por si lo queréis descargar. 
+https://drive.google.com/drive/folders/120vB9CyiqQq83jEJjre5TOqLIe23h7l6?usp=sharing
+
+Eso es todo
