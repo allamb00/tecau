@@ -1,34 +1,36 @@
-# -*- coding: utf-8 -*-
-# @Time : 20-6-3 下午5:39
-# @Author : zhuying
-# @Company : Minivision
-# @File : train.py
-# @Software : PyCharm
-
-import argparse
-import os
+from src.config import TrainConfig
 from src.train_main import TrainMain
-from src.default_config import get_default_config, update_config
-
-
-def parse_args():
-    """parsing and configuration"""
-    desc = "Silence-FAS"
-    parser = argparse.ArgumentParser(description=desc)
-    parser.add_argument("--device_ids", type=str, default="1", help="which gpu id, 0123")
-    parser.add_argument("--patch_info", type=str, default="1_80x80",
-                        help="[org_1_80x60 / 1_80x80 / 2.7_80x80 / 4_80x80]")
-    args = parser.parse_args()
-    cuda_devices = [int(elem) for elem in args.device_ids]
-    os.environ["CUDA_VISIBLE_DEVICES"] = ','.join(map(str, cuda_devices))
-    args.devices = [x for x in range(len(cuda_devices))]
-    return args
-
+import argparse
 
 if __name__ == "__main__":
-    args = parse_args()
-    conf = get_default_config()
-    conf = update_config(args, conf)
-    trainer = TrainMain(conf)
+    # parsing arguments
+    p = argparse.ArgumentParser(description="Training Face-AntiSpoofing Model")
+    p.add_argument("--crop_dir", type=str, default='data128', 
+                    help="Subdir with cropped images")
+    p.add_argument("--input_size", type=int, default=128, 
+                    help="Input size of images passed to model")
+    p.add_argument("--batch_size", type=int, default=256, 
+                    help="Count of images in the batch")
+    p.add_argument("--num_classes", type=int,  default=2, choices=[2, 3],
+                    help="2 for binary or 3 for live-print-replay classification")
+    p.add_argument("--job_name", type=str, default='job', 
+                    help="Suffix for model name saved in snapshots dir")
+    args = p.parse_args()
+    
+    if args.num_classes == 2:
+        spoof_categories = 'binary'
+    elif args.num_classes == 3:
+        spoof_categories = [[0],[1,2,3],[7,8,9]]
+    
+    # create config    
+    cnf = TrainConfig(crop_dir=args.crop_dir,
+                      input_size=args.input_size, 
+                      batch_size=args.batch_size, 
+                      spoof_categories=spoof_categories)
+    cnf.set_job(args.job_name)
+    print("Device:", cnf.device)
+    
+    # training
+    trainer = TrainMain(cnf)
     trainer.train_model()
-
+    print('Finished')

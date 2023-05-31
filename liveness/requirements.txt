@@ -1,6 +1,11 @@
-easydict==1.9
-numpy
-tqdm
-torchvision
+opencv-python
 torch
-tensorboardX==2.0
+torchvision
+numpy
+onnx
+onnxsim
+onnxruntime
+pandas
+tqdm
+tensorboardX
+scikit-learn
