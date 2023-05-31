@@ -58,6 +58,8 @@ if __name__ == "__main__":
         description="Spoofing attack detection on videostream")
     p.add_argument("--input", "-i", type=str, default=None, 
                    help="Path to video for predictions")
+    p.add_argument("--output", "-o", type=str, default=None,
+                   help="Path to save processed video")
     p.add_argument("--model_path", "-m", type=str, 
                    default="saved_models/AntiSpoofing_bin_1.5_128.onnx", 
                    help="Path to ONNX model")
@@ -65,61 +67,68 @@ if __name__ == "__main__":
                    help="real face probability threshold above which the prediction is considered true")
     args = p.parse_args()
     
-    face_detector = YOLOv5('modelos/yolov5s-face.onnx')
+    face_detector = YOLOv5('saved_models/yolov5s-face.onnx')
     anti_spoof = AntiSpoof(args.model_path)
 
-    cap = cv2.VideoCapture(0)
+    # Create a video capture object
+    if args.input:  # file
+        vid_capture = cv2.VideoCapture(args.input)
+    else:           # webcam
+        vid_capture = cv2.VideoCapture(0, cv2.CAP_DSHOW)
 
-    frame_width = int(cap.get(3))
-    frame_height = int(cap.get(4))
+    frame_width = int(vid_capture.get(3))
+    frame_height = int(vid_capture.get(4))
     frame_size = (frame_width, frame_height)
     print('Frame size  :', frame_size)
 
-    if not cap.isOpened():
+    if not vid_capture.isOpened():
         print("Error opening a video stream")
     # Reading fps and frame rate
     else:
-        fps = cap.get(5)    # Get information about frame rate
+        fps = vid_capture.get(5)    # Get information about frame rate
         print('Frame rate  : ', fps, 'FPS')
         if fps == 0:
             fps = 24
+        # frame_count = vid_capture.get(7)    # Get the number of frames
+        # print('Frames count: ', frame_count) 
     
     # process frames
     rec_width = max(1, int(frame_width/240))
     txt_offset = int(frame_height/50)
     txt_width = max(1, int(frame_width/480))
-    
-    while cap.isOpened():
-        ret, frame = cap.read()
-        if ret == False: break
-    
-        # predict score of Live face
-        pred = make_prediction(frame, face_detector, anti_spoof)
-        # if face is detected
-        if pred is not None:
-            (x1, y1, x2, y2), label, score = pred
-            if label == 0:
-                if score > args.threshold:
-                    res_text = "REAL      {:.2f}".format(score)
-                    color = COLOR_REAL
-                else: 
-                    res_text = "unknown"
-                    color = COLOR_UNKNOWN
-            else:
-                res_text = "FAKE      {:.2f}".format(score)
-                color = COLOR_FAKE
+    while vid_capture.isOpened():
+        ret, frame = vid_capture.read()
+        if ret:
+            # predict score of Live face
+            pred = make_prediction(frame, face_detector, anti_spoof)
+            # if face is detected
+            if pred is not None:
+                (x1, y1, x2, y2), label, score = pred
+                if label == 0:
+                    if score > args.threshold:
+                        res_text = "REAL      {:.2f}".format(score)
+                        color = COLOR_REAL
+                    else: 
+                        res_text = "unknown"
+                        color = COLOR_UNKNOWN
+                else:
+                    res_text = "FAKE      {:.2f}".format(score)
+                    color = COLOR_FAKE
+                    
+                # draw bbox with label
+                cv2.rectangle(frame, (x1, y1), (x2, y2), color, rec_width)
+                cv2.putText(frame, res_text, (x1, y1-txt_offset), 
+                            cv2.FONT_HERSHEY_COMPLEX, (x2-x1)/250, color, txt_width)
                 
-            # draw bbox with label
-            cv2.rectangle(frame, (x1, y1), (x2, y2), color, rec_width)
-            cv2.putText(frame, res_text, (x1, y1-txt_offset), 
-                        cv2.FONT_HERSHEY_COMPLEX, (x2-x1)/250, color, txt_width)
-        
-        # if video captured from webcam
-        if not args.input:
-            cv2.imshow('Face AntiSpoofing', frame)
-            key = cv2.waitKey(20)
-            if (key == ord('q')) or key == 27:
-                break
+            # if video captured from webcam
+            if not args.input:
+                cv2.imshow('Face AntiSpoofing', frame)
+                key = cv2.waitKey(20)
+                if (key == ord('q')) or key == 27:
+                    break
+        else:
+            print("Streaming is Off")
+            break
 
     # Release the video capture and writer objects
     vid_capture.release()
