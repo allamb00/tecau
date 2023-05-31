@@ -5,7 +5,7 @@ Repositorio para subir la práctica final de tecnologías de autenticación
 Es el primer ejercicio especificado en la practica 5. Recoge un número de capturas por pantalla y construye un dataset de forma automática. Es necesario revisar el dataset buscando los falsos positivos. El algoritmo es bastante estricto, así que no debería haber muchos (He tenido 4 en las más de 3000 imagenes que he capturado)
 
 ## entrenamientoModelo.py
-Entrena el modelo con el dataset y lo guarda en un .xml para utilizarlo despues. No es necesario entrenarlo con caras de desconocidos, por lo que el dataset de desconocidos no es necesario
+Entrena el modelo con el dataset y lo guarda en un .xml para utilizarlo despues. No es necesario entrenarlo con caras de desconocidos.
 
 ## reconocimientoFacial.py
 Utiliza el modelo entrenado anteriormente para reconocer caras
@@ -15,7 +15,7 @@ Utiliza el modelo entrenado anteriormente para reconocer caras
 Es el modelo de cascada Haar por defecto utilizado en las prácticas
 
 ## Dataset
-El dataset que he utilizado es uno de elaboración propia con mi jeto. Hay otro con desconocidos pero no hace falta para nada.
+El dataset que he utilizado es uno de elaboración propia con mi jeto.
 https://drive.google.com/drive/folders/120vB9CyiqQq83jEJjre5TOqLIe23h7l6?usp=sharing
 
 La estructura de directorios que he utilizado es la siguiente
