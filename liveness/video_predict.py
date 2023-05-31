@@ -47,8 +47,8 @@ def make_prediction(img, face_detector, anti_spoof):
 
 if __name__ == "__main__":    
     
-    face_detector = YOLOv5('saved_models/yolov5s-face.onnx')
-    anti_spoof = AntiSpoof('saved_models/AntiSpoofing_bin_1.5_128.onnx')
+    face_detector = YOLOv5('modelos/yolov5s-face.onnx')
+    anti_spoof = AntiSpoof('modelos/AntiSpoofing_bin_1.5_128.onnx')
 
     cap = cv2.VideoCapture(0)
 
@@ -84,8 +84,7 @@ if __name__ == "__main__":
             # Se dibuja la caja
             cv2.rectangle(frame, (x1, y1), (x2, y2), color, rec_width)
             cv2.putText(frame, res_text, (x1, y1-txt_offset), 
-                        cv2.FONT_HERSHEY_COMPLEX, (x2-x1)/250, color, txt_width)
-            
+                        cv2.FONT_HERSHEY_COMPLEX, (x2-x1)/250, color, txt_width)            
             
         cv2.imshow('Face AntiSpoofing', frame)
         # Salir del bucle si se presiona la tecla 'q'
