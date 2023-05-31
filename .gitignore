@@ -1,5 +1,5 @@
 dataset
-desconocido
-modeloLBPHFace.xml
-modeloFisherFace.xml
-modeloEigenFace.xml
+modelos/modeloLBPHFace.xml
+modelos/modeloFisherFace.xml
+modelos/modeloEigenFace.xml
+liveness

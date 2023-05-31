@@ -23,14 +23,14 @@ print('Lista de personas: ', peopleList)
 face_recognizer = cv2.face.LBPHFaceRecognizer_create()
 
 # Leyendo el modelo
-#face_recognizer.read('modeloEigenFace.xml')
-#face_recognizer.read('modeloFisherFace.xml')
-face_recognizer.read('modeloLBPHFace.xml')
+#face_recognizer.read('modelos/modeloEigenFace.xml')
+#face_recognizer.read('modelos/modeloFisherFace.xml')
+face_recognizer.read('modelos/modeloLBPHFace.xml')
 
 cap = cv2.VideoCapture(0) # En caso de querer detectar caras desde la webcam
 #cap = cv2.VideoCapture('Video.mp4') # En caso de querer detectar caras de un vídeo
 
-faceClassif = cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
+faceClassif = cv2.CascadeClassifier('modelos/haarcascade_frontalface_default.xml')
 
 while True:
     ret,frame = cap.read()

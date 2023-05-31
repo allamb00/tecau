@@ -43,8 +43,12 @@ face_recognizer = cv2.face.LBPHFaceRecognizer_create()
 print("Entrenando...")
 face_recognizer.train(facesData, np.array(labels))
 
+if not os.path.exists('modelos'):
+    os.makedirs('modelos')
+    print('Carpeta creada: ', 'modelos')
+
 # Se almacena el modelo obtenido
-#face_recognizer.write('modeloEigenFace.xml')
-#face_recognizer.write('modeloFisherFace.xml')
-face_recognizer.write('modeloLBPHFace.xml')
+#face_recognizer.write('modelos/modeloEigenFace.xml')
+#face_recognizer.write('modelos/modeloFisherFace.xml')
+face_recognizer.write('modelos/modeloLBPHFace.xml')
 print("Modelo almacenado")

@@ -17,7 +17,7 @@ if not os.path.exists(nombre_usuario):
     
 cap = cv2.VideoCapture(0)
 
-faceClassif = cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
+faceClassif = cv2.CascadeClassifier('modelos/haarcascade_frontalface_default.xml')
 
 numcapturas = int(input("Introduce el número de capturas a realizar:  "))
 
