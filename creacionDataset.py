@@ -3,9 +3,17 @@ import os
 from datetime import datetime
 
 #Creamos una carpeta para almacenar los rostros si esta no existe
+nombre_usuario = input("Introduce el nombre del usuario a registrar:  ")
+
 if not os.path.exists('dataset'):
-    print('Carpeta creada: dataset')
     os.makedirs('dataset')
+    print('Carpeta creada: ', 'dataset')
+    
+if not os.path.exists(nombre_usuario):
+    ruta = os.path.join('dataset', nombre_usuario)
+    os.makedirs(ruta)
+    print('Carpeta creada: ', nombre_usuario)
+    
     
 cap = cv2.VideoCapture(0)
 
@@ -22,8 +30,8 @@ while count < numcapturas:
     
     faces = faceClassif.detectMultiScale(gray, 1.2, 9)
     
-    k = cv2.waitKey(1)
-    if k == 27:
+    # Salir del bucle si se presiona la tecla 'q'
+    if cv2.waitKey(1) & 0xFF == ord('q'):
         break
     
     for (x,y,w,h) in faces:
@@ -36,7 +44,7 @@ while count < numcapturas:
         nombre_archivo = f"imagen_{count}{timestamp}.jpg"
         
         #if k == ord('s'):
-        cv2.imwrite(os.path.join('dataset', nombre_archivo), rostro)
+        cv2.imwrite(os.path.join(ruta, nombre_archivo), rostro)
         cv2.imshow('rostro',rostro)
         count = count +1
         #5
