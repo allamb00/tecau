@@ -1,27 +1,28 @@
 # tecau
 Repositorio para subir la práctica final de tecnologías de autenticación
+En requirements.txt se encuentran todos los módulos necesarios para la práctica
 
-## creacionDataset.py
+## creacion_dataset.py
 Es el primer ejercicio especificado en la practica 5. Recoge un número de capturas por pantalla y construye un dataset de forma automática. Es necesario revisar el dataset buscando los falsos positivos. El algoritmo es bastante estricto, así que no debería haber muchos (He tenido 4 en las más de 3000 imagenes que he capturado)
 
-## entrenamientoModelo.py
+## entrenamiento_modelo.py
 Entrena el modelo con el dataset y lo guarda en un .xml para utilizarlo despues. No es necesario entrenarlo con caras de desconocidos.
 
-## reconocimientoFacial.py
+## reconocimiento_facial.py
 Utiliza el modelo entrenado anteriormente para reconocer caras
 
-
-## haarcascade_frontalface_default.xml
-Es el modelo de cascada Haar por defecto utilizado en las prácticas
-
-## Dataset
-El dataset que he utilizado es uno de elaboración propia con mi jeto.
-https://drive.google.com/drive/folders/120vB9CyiqQq83jEJjre5TOqLIe23h7l6?usp=sharing
+## reconocimiento_facial_antispoofing.py
+Además de reconocer rostros, diferencia entre rostros reales y falsos
 
 La estructura de directorios que he utilizado es la siguiente
 
 /
-|-scripts.py
+|-creacion_dataset.py
+|-entrenamiento_modelo.py
+|-reconocimiento_facial.py
+|-reconocimiento_facial_antispoofing.py
+|-modelos
+|-src
 |-dataset
      |-andres
      |   |-imagenes.jpg
