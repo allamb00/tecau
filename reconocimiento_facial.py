@@ -13,19 +13,19 @@ Estructura del directorio:
 dataPath = 'dataset' #Ruta al dataset
 peopleList = os.listdir(dataPath)
 
-# Filtrar solo los directorios de la lista
+# Se filtran solo los directorios de la lista
 peopleList = [item for item in peopleList if os.path.isdir(os.path.join(dataPath, item))]
 
 print('Lista de personas: ', peopleList)
 
 face_recognizer = cv2.face.LBPHFaceRecognizer_create()
 
-# Leyendo el modelo
+# Se leen los modelos
 face_recognizer.read('modelos/modeloLBPHFace.xml')
-
-cap = cv2.VideoCapture(0)
-
 faceClassif = cv2.CascadeClassifier('modelos/haarcascade_frontalface_default.xml')
+
+#Se captura con la webcam
+cap = cv2.VideoCapture(0)
 
 while True:
     ret,frame = cap.read()
@@ -50,7 +50,7 @@ while True:
             cv2.rectangle(frame, (x,y),(x+w,y+h),(0,0,255),2)
         
     cv2.imshow('frame',frame)    
-    # Salir del bucle si se presiona la tecla 'q'
+    # Se sale del bucle si se presiona la tecla 'q'
     if cv2.waitKey(1) & 0xFF == ord('q'):
         break
 
