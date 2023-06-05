@@ -1,3 +1,5 @@
+#Módulos necesarios para la ejecución del programa
+
 opencv-contrib-python
 tqdm
 numpy

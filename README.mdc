@@ -1,3 +1,16 @@
+'''
+   ▄████████    ▄████████  ▄████████  ▄██████▄  ███▄▄▄▄    ▄██████▄    ▄▄▄▄███▄▄▄▄      ▄████████     ███      ▄█   ▄████████      
+  ███    ███   ███    ███ ███    ███ ███    ███ ███▀▀▀██▄ ███    ███ ▄██▀▀▀███▀▀▀██▄   ███    ███ ▀█████████▄ ███  ███    ███      
+  ███    ███   ███    █▀  ███    █▀  ███    ███ ███   ███ ███    ███ ███   ███   ███   ███    ███    ▀███▀▀██ ███▌ ███    █▀       
+ ▄███▄▄▄▄██▀  ▄███▄▄▄     ███        ███    ███ ███   ███ ███    ███ ███   ███   ███   ███    ███     ███   ▀ ███▌ ███             
+▀▀███▀▀▀▀▀   ▀▀███▀▀▀     ███        ███    ███ ███   ███ ███    ███ ███   ███   ███ ▀███████████     ███     ███▌ ███             
+▀███████████   ███    █▄  ███    █▄  ███    ███ ███   ███ ███    ███ ███   ███   ███   ███    ███     ███     ███  ███    █▄       
+  ███    ███   ███    ███ ███    ███ ███    ███ ███   ███ ███    ███ ███   ███   ███   ███    ███     ███     ███  ███    ███      
+  ███    ███   ██████████ ████████▀   ▀██████▀   ▀█   █▀   ▀██████▀   ▀█   ███   █▀    ███    █▀     ▄████▀   █▀   ████████▀       
+  ███    ███                                                                                                                 
+
+'''
+
 # https://github.com/allamb00/tecau
 Repositorio para subir la práctica final de tecnologías de autenticación
 En requirements.txt se encuentran todos los módulos necesarios para la práctica
@@ -14,7 +27,7 @@ Utiliza el modelo entrenado anteriormente para reconocer caras
 ## reconocimiento_facial_antispoofing.py
 Además de reconocer rostros, diferencia entre rostros reales y falsos
 
-La estructura de directorios que he utilizado es la siguiente
+La estructura de directorios es la siguiente:
 
 /
 |-creacion_dataset.py
@@ -24,12 +37,12 @@ La estructura de directorios que he utilizado es la siguiente
 |-modelos
 |-src
 |-dataset
-     |-andres
+     |-persona1
      |   |-imagenes.jpg
      |
-     |-otraPersona
+     |-persona2
      |   |-imagenes.jpg
      |
      |-etc
 
-Eso es todo
+
