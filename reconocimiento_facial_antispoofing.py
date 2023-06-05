@@ -1,3 +1,13 @@
+'''
+Autores: Raúl Baides, Andrés Llamosas y Amaia Echeandia
+Asignatura: Tecnologías de Autenticación
+Fecha: 06.06.2023
+
+Descripción: Este código tiene como objetivo capturar la imagen de la webcam, detectar el rostro,
+             identificar a la persona y analizar un posible spoofing.
+
+'''
+
 from src.face_detector import YOLOv5
 from src.FaceAntiSpoofing import AntiSpoof
 import cv2
@@ -62,12 +72,14 @@ if __name__ == "__main__":
 
     # Se filtran solo los directorios de la lista
     peopleList = [item for item in peopleList if os.path.isdir(os.path.join(dataPath, item))]
-
+    
+    #Lista los usuarios registrados
     print('Lista de personas: ', peopleList)
 
+    #Se selecciona el método LBPH 
     face_recognizer = cv2.face.LBPHFaceRecognizer_create()
     
-    # Se leen los modelos
+    #Se leen los modelos
     face_recognizer.read('modelos/modeloLBPHFace.xml') # Modelo para reconocer caras
     faceClassif = cv2.CascadeClassifier('modelos/haarcascade_frontalface_default.xml')  # Modelo para detectar caras en reconocimiento
     anti_spoof = AntiSpoof('modelos/AntiSpoofing_bin_1.5_128.onnx') # Modelo para detectar spoofing
@@ -125,6 +137,7 @@ if __name__ == "__main__":
         # Se sale del bucle si se pulsa la tecla 'q'
         if cv2.waitKey(1) & 0xFF == ord('q'):
             break
-
+    
+    #Liberamos recursos de captura y cerramos ventanas de visualización
     cap.release()
     cv2.destroyAllWindows()
